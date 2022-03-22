@@ -1,0 +1,19 @@
+job('NodeJS example') {
+    scm {
+        git('git://github.com/wardviaene/docker-demo.git') {
+        node -> node / gitConfigName('DSL User')
+        node / gitConfigEmail('max_haberstroh@hotmail.com')
+        }
+     }
+    triggers {
+        scm('H/5 * * * *')
+    }
+    wrappers {
+    nodejs('nodejs') // this is the name of the NodeJS installation installation
+                     // Manage Jenkins -> Configure Tools -> NodeJS Installations -> Name
+    }
+
+    steps {
+        shell('npm install')
+        }
+}
